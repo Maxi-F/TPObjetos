@@ -13,6 +13,8 @@ object fuerzaOscura {
 
 object rolando {
 	var hechizoPreferido = espectroMalefico
+	var artefactos = []
+	var valorBaseDeLucha = 1
 	
 	method nivelDeHechiceria() {
 		return (3*hechizoPreferido.poder()) + fuerzaOscura.valor()
@@ -24,6 +26,37 @@ object rolando {
 	
 	method esPoderoso() {
 		return hechizoPreferido.esHechizoPoderoso()
+	}
+	
+	method agregarArtefacto(nuevoArtefacto){
+		artefactos.add(nuevoArtefacto)
+	}
+	
+	method removerArtefacto(artefacto){
+		artefactos.remove(artefacto)
+	}
+	
+	method removerTodosLosArtefactos(){
+		artefactos.clear()
+	}
+	
+	method valorBaseDeLucha(){
+		return valorBaseDeLucha
+	}
+	method modificarValorBaseDeLucha(nuevoValorBaseDeLucha){
+		valorBaseDeLucha = nuevoValorBaseDeLucha
+	}
+	
+	method aporteDeArtefactos(){
+		return artefactos.map({unArtefacto => unArtefacto.unidadesDeLucha()}).sum()
+	}
+	
+	method habilidadParaLaLucha(){
+		return (valorBaseDeLucha + (self.aporteDeArtefactos()))
+	}
+	
+	method habilidadEsMayorQueHechiceria(){
+		return self.habilidadParaLaLucha() > self.nivelDeHechiceria()
 	}
 }
 
@@ -52,6 +85,32 @@ object hechizoBasico {
 	
 	method esHechizoPoderoso() {
 		return false
+	}
+}
+
+object espadaDelDestino{
+	
+	method unidadesDeLucha(){
+		return 3
+	}
+}
+
+object collarDivino{
+	var perlas = 6
+	
+	method cantidadDePerlas(cantidad){
+		perlas = cantidad
+	}
+	
+	method unidadesDeLucha(){
+		return perlas
+	}
+}
+
+object mascaraOscura{
+	
+	method unidadesDeLucha(){
+		return (4.max(0.5*fuerzaOscura.valor()))
 	}
 }
 
