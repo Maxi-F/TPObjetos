@@ -1,0 +1,61 @@
+import example.*
+
+/*----- Punto 3: Lucha y hechiceria avanzada -----*/
+
+describe "Rolando tiene como artefactos la espada del destino, el collar divino, la mascara oscura, una armadura sin refuerzo y el espejo."{
+	fixture{
+		armadura.cambiarRefuerzo(ningunRefuerzo)
+		collarDivino.perlas(5)
+		rolando.agregarArtefacto(espadaDelDestino)
+		rolando.agregarArtefacto(collarDivino)
+		rolando.agregarArtefacto(mascaraOscura)
+		rolando.agregarArtefacto(armadura)
+		rolando.agregarArtefacto(espejo)
+	}
+	
+	test "Si Rolando tiene 5 o más artefactos, esta cargado"{
+		assert.that(rolando.estaCargado())
+	}
+	
+	test "Si Rolando se saca la armadura, deja de estar cargado"{
+		rolando.removerArtefacto(armadura)
+		assert.notThat(rolando.estaCargado())
+	}
+	
+	test "La habilidad de Rolando con todos los artefactos es 20"{
+		assert.equals(20, rolando.habilidadParaLaLucha())
+	}
+	
+	test "Las unidades de lucha que aporta una armadura reforzada con una bendicion es 58"{
+		armadura.cambiarRefuerzo(bendicion)
+		assert.equals(58, armadura.unidadesDeLucha())
+	}
+	
+	test "Las unidades de lucha que aporta una armadura reforzada con una cota de malla es 3"{
+		armadura.cambiarRefuerzo(cotaDeMalla)
+		assert.equals(3, armadura.unidadesDeLucha())
+	}
+	
+	test "Las unidades de lucha que aporta una armadura reforzada con un hechizo basico es 12"{
+		armadura.cambiarRefuerzo(hechizoBasico)
+		assert.equals(12, armadura.unidadesDeLucha())
+	}
+	
+	test "Las unidades de lucha que aporta una armadura reforzada con el hechizo espectro malefico es 19"{
+		armadura.cambiarRefuerzo(espectroMalefico)
+		assert.equals(19, armadura.unidadesDeLucha())
+	}
+	
+	test "Cuando se eliminan todos los artefactos salvo el espejo, la habilidad para la lucha de Rolando es 1"{
+		rolando.removerTodosLosArtefactos()
+		assert.equals(1, rolando.habilidadParaLaLucha())
+	}
+	
+	test "Si el hechizo preferido de Rolando es un libro de hechizos que contiene espectro malefico (con nombre 'espectro malefico') y un hechizo basico, su nivel de hechiceria es 56"{
+		espectroMalefico.cambiarNombre("espectro malefico")
+		libroDeHechizos.agregarHechizo(espectroMalefico)
+		libroDeHechizos.agregarHechizo(hechizoBasico)
+		rolando.cambiarHechizoPreferido(libroDeHechizos)
+		assert.equals(56, rolando.nivelDeHechiceria())
+	}
+}
