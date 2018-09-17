@@ -1,6 +1,8 @@
 import example.*
 
-describe "Rolando tiene como hechizo preferido ´espectro malefico´ y este tiene como su nombre ´espectro malefico´" {
+/*----- Punto 1: Hechiceria -----*/
+
+describe "Rolando tiene como hechizo preferido 'espectro malefico' y este tiene como su nombre 'espectro malefico'" {
 	fixture {
 		rolando.cambiarHechizoPreferido(espectroMalefico)
 		espectroMalefico.cambiarNombre("Espectro Malefico")
@@ -10,13 +12,13 @@ describe "Rolando tiene como hechizo preferido ´espectro malefico´ y este tien
 		assert.equals(56, rolando.nivelDeHechiceria())
 	}
 	
-	test "cuando se cambia el nombre de espectroMalefico a ´espectro superrecontramalefico muajajaja´ rolando tiene un
+	test "cuando se cambia el nombre de espectroMalefico a 'espectro superrecontramalefico muajajaja' rolando tiene un
 		  nivel de hechiceria de 125" {
 		espectroMalefico.cambiarNombre("espectro superrecontramalefico muajajaja")
 		assert.equals(125, rolando.nivelDeHechiceria())
 	}
 	
-	test "cuando se cambia el hechizo favorito de rolando a ´hechizo basico´, su nivel de hechiceria es de 35" {
+	test "cuando se cambia el hechizo favorito de rolando a 'hechizo basico', su nivel de hechiceria es de 35" {
 		rolando.cambiarHechizoPreferido(hechizoBasico)
 		assert.equals(35, rolando.nivelDeHechiceria())
 	}
@@ -30,54 +32,13 @@ describe "Rolando tiene como hechizo preferido ´espectro malefico´ y este tien
 		assert.that(espectroMalefico.esHechizoPoderoso())
 	}
 	
-	test "cuando el espectro malefico tiene como nombre ´pepe´, no es poderoso" {
+	test "cuando el espectro malefico tiene como nombre 'pepe', no es poderoso" {
 		espectroMalefico.cambiarNombre("pepe")
-		assert.that(!espectroMalefico.esHechizoPoderoso())
+		assert.notThat(espectroMalefico.esHechizoPoderoso())
 	}
 	
 	test "el hechizo basico no es poderoso" {
-		assert.that(!hechizoBasico.esHechizoPoderoso())
+		assert.notThat(hechizoBasico.esHechizoPoderoso())
 	}
-	
-}
-
-describe "Rolando tiene como artefactos la espada del destino, el collar divino (con 5 perlas) y la mascara oscura."{
-	fixture{
-		collarDivino.cantidadDePerlas(5)
-		rolando.agregarArtefacto(espadaDelDestino)
-		rolando.agregarArtefacto(collarDivino)
-		rolando.agregarArtefacto(mascaraOscura)
-	}
-	
-	test "Cuando se eliminan todos los artefactos, la habilidad para la lucha de Rolando es 1 "{
-		rolando.removerTodosLosArtefactos()
-		assert.equals(1, rolando.habilidadParaLaLucha())
-	}
-	
-	test "La habilidad de Rolando con todos los artefactos es 13"{
-		assert.equals(13, rolando.habilidadParaLaLucha())
-	}
-	
-	test "Cuando se cambia la cantidad de perlas del collar divino a 3, la habilidad para la lucha de Rolando con todos los artefactos es 11"{
-		collarDivino.cantidadDePerlas(3)
-		assert.equals(11, rolando.habilidadParaLaLucha())
-	}
-	
-	test "Cuando se cambia el valor base para la lucha de Rolando a 8, la habilidad para la lucha de Rolando con todos los artefactos es 20"{
-		rolando.modificarValorBaseDeLucha(8)
-		assert.equals(20, rolando.habilidadParaLaLucha())
-	}
-	
-	test "Cuando ocurre un eclipse, el valor de lucha de la mascara oscura es 5"{
-		fuerzaOscura.eclipse()
-		assert.equals(5,mascaraOscura.unidadesDeLucha())
-		
-	}
-	
-	test "Cuando se elimina la mascara oscura de los artefactos de Rolando, la habilidad para la lucha es 9 "{
-		rolando.removerArtefacto(mascaraOscura)
-		assert.equals(9, rolando.habilidadParaLaLucha())
-	}
-	
 	
 }
