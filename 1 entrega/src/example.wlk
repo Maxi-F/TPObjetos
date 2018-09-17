@@ -132,6 +132,6 @@ object libroDeHechizos{
 
 wollok.lang.MessageNotUnderstoodException: libroDeHechizos[hechizos=[libroDeHechizos]] no entiende el mensaje unidadesDeLucha()
 
-* En este caso, al añadir una excepcion propia, indicara que agregar libroDeHechizos como hechizo al libroDeHechizo es una accion invalida
+* En este caso, al añadir una excepcion propia, indicara que agregar libroDeHechizos como hechizo al libroDeHechizos es una accion invalida
 
 */
