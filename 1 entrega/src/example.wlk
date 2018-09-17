@@ -1,116 +1,137 @@
-/** First Wollok example */
+/*       _______________________________________________________________________
+	|:..                         TP  OBJETOS                   ``:::%%%%%%%%|
+	|%%%:::::..            Rol de Lucha y Hechiceria              `:::::%%%%|
+	|%%%%%%%:::::.....________________________________________________::::::|
+*/
+
+/*----- Punto 1: Hechiceria -----*/
+
 object fuerzaOscura {
 	var poder = 5
 	
-	method eclipse() {
-		poder *= 2
-	}
+	method eclipse() { poder *= 2 }
 	
-	method valor() {
-		return poder
-	}
+	method valor() = poder
 }
 
 object rolando {
 	var hechizoPreferido = espectroMalefico
 	var artefactos = []
-	var valorBaseDeLucha = 1
+	var property valorBaseDeLucha = 1
 	
-	method nivelDeHechiceria() {
-		return (3*hechizoPreferido.poder()) + fuerzaOscura.valor()
-	}
+	method nivelDeHechiceria() = 3*hechizoPreferido.poder() + fuerzaOscura.valor()
 	
-	method cambiarHechizoPreferido(nuevoHechizo) {
-		hechizoPreferido = nuevoHechizo
-	}
+	method cambiarHechizoPreferido(nuevoHechizo) { hechizoPreferido = nuevoHechizo }
 	
-	method esPoderoso() {
-		return hechizoPreferido.esHechizoPoderoso()
-	}
+	method esPoderoso() = hechizoPreferido.esHechizoPoderoso()
 	
-	method agregarArtefacto(nuevoArtefacto){
-		artefactos.add(nuevoArtefacto)
-	}
+	method agregarArtefacto(nuevoArtefacto) { artefactos.add(nuevoArtefacto) }
 	
-	method removerArtefacto(artefacto){
-		artefactos.remove(artefacto)
-	}
+	method removerArtefacto(artefacto) { artefactos.remove(artefacto) }
 	
-	method removerTodosLosArtefactos(){
-		artefactos.clear()
-	}
+	method removerTodosLosArtefactos() { artefactos.clear() }
 	
-	method valorBaseDeLucha(){
-		return valorBaseDeLucha
-	}
-	method modificarValorBaseDeLucha(nuevoValorBaseDeLucha){
-		valorBaseDeLucha = nuevoValorBaseDeLucha
-	}
+	method aporteDeArtefactos() = artefactos.sum({unArtefacto => unArtefacto.unidadesDeLucha()})
 	
-	method aporteDeArtefactos(){
-		return artefactos.map({unArtefacto => unArtefacto.unidadesDeLucha()}).sum()
-	}
+	method habilidadParaLaLucha() = valorBaseDeLucha + self.aporteDeArtefactos()
 	
-	method habilidadParaLaLucha(){
-		return (valorBaseDeLucha + (self.aporteDeArtefactos()))
-	}
+	method habilidadEsMayorQueHechiceria() = self.habilidadParaLaLucha() > self.nivelDeHechiceria()
 	
-	method habilidadEsMayorQueHechiceria(){
-		return self.habilidadParaLaLucha() > self.nivelDeHechiceria()
-	}
+	method soloTieneAlEspejo() = artefactos == [espejo]
+	
+	method pertenenciaMasPoderosa() = artefactos.max({unArtefacto => if(unArtefacto != espejo) unArtefacto.unidadesDeLucha() else -1})
+	
+	method estaCargado() = artefactos.size() >= 5
 }
 
 object espectroMalefico {
 	var nombre = "Espectro Malefico"
 	
-	method cambiarNombre(nuevoNombre) {
-		nombre = nuevoNombre
-	}
+	method cambiarNombre(nuevoNombre) { nombre = nuevoNombre }
 	
-	method poder() {
-		return nombre.size()
-	}
+	method poder() = nombre.size()
 	
-	method esHechizoPoderoso() {
-		return self.poder() > 15
-	}
+	method esHechizoPoderoso() = self.poder() > 15
+	
+	method valorDelRefuerzo() = self.poder()
 }
 
 object hechizoBasico {
 	method cambiarNombre(nuevoNombre) {}
 	
-	method poder() {
-		return 10
-	}
+	method poder() = 10
 	
-	method esHechizoPoderoso() {
-		return false
-	}
+	method esHechizoPoderoso() = false
+	
+	method valorDelRefuerzo() = self.poder()
 }
 
+/*----- Punto 2: Lucha -----*/
+
 object espadaDelDestino{
-	
-	method unidadesDeLucha(){
-		return 3
-	}
+	method unidadesDeLucha() = 3
 }
 
 object collarDivino{
-	var perlas = 6
+	var property perlas = 5
 	
-	method cantidadDePerlas(cantidad){
-		perlas = cantidad
-	}
-	
-	method unidadesDeLucha(){
-		return perlas
-	}
+	method unidadesDeLucha() = perlas
 }
 
 object mascaraOscura{
+	method unidadesDeLucha() = 4.max(0.5*fuerzaOscura.valor())
+}
+
+/*----- Punto 3: Lucha y hechiceria avanzada -----*/
+
+object armadura{
+	var refuerzo = ningunRefuerzo
 	
+	method cambiarRefuerzo(nuevoRefuerzo) { refuerzo = nuevoRefuerzo }
+	
+	method unidadesDeLucha() = 2 + refuerzo.valorDelRefuerzo()
+} 
+
+object cotaDeMalla{
+	method valorDelRefuerzo() = 1
+}
+
+object bendicion{
+	method valorDelRefuerzo() = rolando.nivelDeHechiceria()
+}
+
+object ningunRefuerzo{
+	method valorDelRefuerzo() = 0
+}
+
+object espejo{
 	method unidadesDeLucha(){
-		return (4.max(0.5*fuerzaOscura.valor()))
+		if (rolando.soloTieneAlEspejo())
+			return 0
+		else
+			return rolando.pertenenciaMasPoderosa().unidadesDeLucha()
 	}
 }
 
+object libroDeHechizos{
+	var hechizos = []
+	
+	method cambiarNombre(nuevoNombre) {}
+		
+	method agregarHechizo(nuevoHechizo) { if(nuevoHechizo != self) hechizos.add(nuevoHechizo) else self.error("Accion invalida. Pruebe otro hechizo.") }
+	
+	method poder() = hechizos.sum({unHechizo => if(unHechizo.esHechizoPoderoso()) unHechizo.poder() else 0})
+	
+	method esHechizoPoderoso(){}
+}
+
+/*
+
+¿Que sucede si el libro de hechizos incluye como hechizo al mismo libro de hechizos?
+* Dara un mensaje de error indicando que el object "libroDeHechizos" no entiende el mensaje "unidadesDeLucha()"
+
+wollok.lang.MessageNotUnderstoodException: libroDeHechizos[hechizos=[libroDeHechizos]] no entiende el mensaje unidadesDeLucha()
+
+* En este caso, al añadir una excepcion propia, indicara que agregar libroDeHechizos como hechizo al libroDeHechizo es una accion invalida
+
+*/
