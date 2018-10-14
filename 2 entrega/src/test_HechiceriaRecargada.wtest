@@ -1,0 +1,44 @@
+import Personaje.*
+import Hechizos.*
+import FuerzaOscura.*
+
+describe "Se crea a ´Rolando´. Su hechizo preferido es un hechizo de logos con el nombre ´Espectro Malefico´, con multiplo 1" {
+	var rolando
+	var espectroMalefico
+	fixture {
+		espectroMalefico = new HechizoDeLogos("Espectro Malefico", 1)
+		rolando = new Personaje(espectroMalefico, [], 0)
+	}
+	
+	test "cuando preguntamos por su nivel de hechiceria, este retorna 56" {
+		assert.equals(56, rolando.nivelDeHechiceria())
+	}
+	
+	test "al cambiar el nombre del espectro malefico a ´espectro superrecontramalefico muajajaja´, su nivel de hechiceria es de 125" {
+		espectroMalefico.cambiarNombre("espectro superrecontramalefico muajajaja")
+		assert.equals(125, rolando.nivelDeHechiceria())
+	}
+	
+	test "Al cambiar el hechizo preferido de rolando al hechizo basico, su nivel de hechiceria es de 35" {
+		rolando.cambiarHechizoPreferido(hechizoBasico)
+		assert.equals(35, rolando.nivelDeHechiceria())
+	}
+	
+	test "ocurre un eclipse, y el nivel de hechiceria de rolando es de 61" {
+		fuerzaOscura.eclipse()
+		assert.equals(61, rolando.nivelDeHechiceria())
+	}
+	
+	test "Al preguntar si el espectro malefico es poderoso, retorna que lo es" {
+		assert.that(espectroMalefico.esHechizoPoderoso())
+	}
+	
+	test "Al cambiar el nombre del espectro malefico a ´Pepe´, este deja de ser poderoso" {
+		espectroMalefico.cambiarNombre("Pepe")
+		assert.notThat(espectroMalefico.esHechizoPoderoso())
+	}
+	
+	test "Al preguntar si el hechizo basico es poderoso, retorna que no lo es" {
+		assert.notThat(hechizoBasico.esHechizoPoderoso())
+	}
+}

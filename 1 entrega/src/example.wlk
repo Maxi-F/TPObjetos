@@ -44,6 +44,8 @@ object rolando {
 	
 	method pertenenciaMasPoderosa() = artefactos.max({unArtefacto => if(unArtefacto != espejo) unArtefacto.unidadesDeLucha(self) else 0})
 	
+	method unidadesDeLuchaDePertenenciaMasPoderosa() = self.pertenenciaMasPoderosa().unidadesDeLucha()
+	
 	method estaCargado() = artefactos.size() >= 5
 }
 
@@ -112,7 +114,7 @@ object espejo{
 		if (portador.soloTieneAlEspejo())
 			return 0
 		else
-			return portador.pertenenciaMasPoderosa().unidadesDeLucha(portador)
+			return portador.unidadesDeLuchaDePertenenciaMasPoderosa()
 	}
 }
 
@@ -121,7 +123,7 @@ object libroDeHechizos{
 		
 	method agregarHechizo(nuevoHechizo) { hechizos.add(nuevoHechizo) }
 	
-	method poder() = hechizos.sum({unHechizo => if(unHechizo.esHechizoPoderoso()) unHechizo.poder() else 0})
+	method poder() = hechizos.sum({unHechizo => unHechizo.poder()})
 }
 
 /*
