@@ -39,7 +39,7 @@ test "Cuando Thor canjea dos veces el mismo hechizo basico, le quedan 90 monedas
 }
 
 test "Cuando loki quiere canjear el hechizo por el de alacachula cachicomula del juego de datos, no puede"{
-	assert.notThat(loki.comprarHechizo(alacachulaCachicomula))
+	assert.throwsException{loki.comprarHechizo(alacachulaCachicomula)}
 }
 
 test "Cuando Xenia compra una espada, un collar divino (de 5 perlas), una armadura sin refuerzo y otra armadura con malla de cota cuyo valor de lucha es 5, le quedan 70.5 monedas"{
@@ -67,7 +67,7 @@ test "Cuando Thor compra una armadura con bendicion como refuerzo, y una armadur
 }
 
 test "Cuando Loki quiere comprar el espejo, no puede"{
-	assert.notThat(loki.comprarArtefacto(espejo))
+	assert.throwsException{loki.comprarArtefacto(espejo)}
 }
 
 test "Cuando Xenia canjea un libro de hechizos que contiene el hechizo de logos de nombre alacachula cachicomula y el hechizo basico, le quedan 69 monedas"{
