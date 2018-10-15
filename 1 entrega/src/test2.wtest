@@ -31,7 +31,7 @@ describe "Rolando tiene como artefactos la espada del destino, el collar divino 
 	
 	test "Cuando ocurre un eclipse, el valor de lucha de la mascara oscura es 5"{
 		fuerzaOscura.eclipse()
-		assert.equals(5,mascaraOscura.unidadesDeLucha())
+		assert.equals(5,mascaraOscura.unidadesDeLucha(rolando))
 		
 	}
 	

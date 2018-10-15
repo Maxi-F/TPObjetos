@@ -28,22 +28,22 @@ describe "Rolando tiene como artefactos la espada del destino, el collar divino,
 	
 	test "Las unidades de lucha que aporta una armadura reforzada con una bendicion es 58"{
 		armadura.cambiarRefuerzo(bendicion)
-		assert.equals(58, armadura.unidadesDeLucha())
+		assert.equals(58, armadura.unidadesDeLucha(rolando))
 	}
 	
 	test "Las unidades de lucha que aporta una armadura reforzada con una cota de malla es 3"{
 		armadura.cambiarRefuerzo(cotaDeMalla)
-		assert.equals(3, armadura.unidadesDeLucha())
+		assert.equals(3, armadura.unidadesDeLucha(rolando))
 	}
 	
 	test "Las unidades de lucha que aporta una armadura reforzada con un hechizo basico es 12"{
 		armadura.cambiarRefuerzo(hechizoBasico)
-		assert.equals(12, armadura.unidadesDeLucha())
+		assert.equals(12, armadura.unidadesDeLucha(rolando))
 	}
 	
 	test "Las unidades de lucha que aporta una armadura reforzada con el hechizo espectro malefico es 19"{
 		armadura.cambiarRefuerzo(espectroMalefico)
-		assert.equals(19, armadura.unidadesDeLucha())
+		assert.equals(19, armadura.unidadesDeLucha(rolando))
 	}
 	
 	test "Cuando se eliminan todos los artefactos salvo el espejo, la habilidad para la lucha de Rolando es 1"{
