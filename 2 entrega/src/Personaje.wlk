@@ -36,7 +36,7 @@ class Personaje {
 	
 	method soloTieneAlEspejo() = artefactos == [espejo]
 	
-	method pertenenciaMasPoderosa() = artefactos.max({unArtefacto => if(unArtefacto != espejo) unArtefacto.unidadesDeLucha(self) else 0})
+	method pertenenciaMasPoderosa() = artefactos.filter({unArtefacto => unArtefacto.noEsEspejo()}).max({unArtefacto => unArtefacto.unidadesDeLucha(self)})
 	
 	method unidadesDeLuchaDePertenenciaMasPoderosa() = self.pertenenciaMasPoderosa().unidadesDeLucha(self)
 	

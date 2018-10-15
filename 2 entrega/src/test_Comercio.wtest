@@ -2,7 +2,6 @@ import Personaje.*
 import ObjetosDeLucha.*
 import Hechizos.*
 import FuerzaOscura.*
-import Comercio.*
 
 describe "Se crea a Xenia, Thor y Loki con sus respectivos hechizos preferidos" {
 	var xenia

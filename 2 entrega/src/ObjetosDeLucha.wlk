@@ -10,6 +10,8 @@ class Arma{
 	
 	method unidadesDeLucha(portador) = 3
 	
+	method noEsEspejo() = true
+	
 	method precio(portador) = self.unidadesDeLucha(portador)*5
 }
 
@@ -23,6 +25,8 @@ class MascaraOscura{
 	}
 	
 	method unidadesDeLucha(portador) = valorMinimo.max(0.5*fuerzaOscura.valor()*indiceDeOscuridad)
+	
+	method noEsEspejo() = true
 }
 
 class Armadura{
@@ -39,6 +43,8 @@ class Armadura{
 	method unidadesDeLucha(portador) = valorBaseDeArmadura + refuerzo.valorDelRefuerzo(portador)
 	
 	method precio(portador) = refuerzo.precioDelRefuerzo(portador, valorBaseDeArmadura)
+	
+	method noEsEspejo() = true
 } 
 
 class CotaDeMalla{
@@ -51,6 +57,7 @@ class CotaDeMalla{
 	method valorDelRefuerzo(portador) = valorDelRefuerzo
 	
 	method precioDelRefuerzo(portador, valorBaseDeArmadura) = valorDelRefuerzo/2
+	
 }
 
 object bendicion{
@@ -65,6 +72,8 @@ object collarDivino{
 	method unidadesDeLucha(portador) = perlas
 	
 	method precio(portador) = perlas*2
+	
+	method noEsEspejo() = true
 }
 
 object ningunRefuerzo{
@@ -82,6 +91,8 @@ object espejo{
 	}
 	
 	method precio(portador) = 90
+	
+	method noEsEspejo() = false
 }
 
 class LibroDeHechizos{
@@ -96,6 +107,8 @@ class LibroDeHechizos{
 	method poder() = hechizos.filter({unHechizo => unHechizo.esHechizoPoderoso()}).sum({unHechizo => unHechizo.poder()})
 	
 	method precio(portador) = hechizos.size()*10 + self.poder()
+	
+	method noEsEspejo() = true
 }
 
 
