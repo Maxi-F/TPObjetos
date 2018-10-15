@@ -16,6 +16,10 @@ class HechizoDeLogos {
 	method esHechizoPoderoso() = self.poder() > 15
 	
 	method valorDelRefuerzo(portador) = self.poder()
+	
+	method precio(portador) = self.poder()
+
+	method precioDelRefuerzo(portador, valorBaseDeArmadura) = valorBaseDeArmadura + self.precio(portador)
 }
 
 object hechizoBasico {
@@ -24,5 +28,9 @@ object hechizoBasico {
 	method esHechizoPoderoso() = false
 	
 	method valorDelRefuerzo(portador) = self.poder()
+	
+	method precio(portador) = 10
+	
+	method precioDelRefuerzo(portador, valorBaseDeArmadura) = valorBaseDeArmadura + self.precio(portador)
 }
 

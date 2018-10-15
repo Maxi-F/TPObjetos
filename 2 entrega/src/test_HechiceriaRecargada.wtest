@@ -7,7 +7,7 @@ describe "Se crea a ´Rolando´. Su hechizo preferido es un hechizo de logos con
 	var espectroMalefico
 	fixture {
 		espectroMalefico = new HechizoDeLogos("Espectro Malefico", 1)
-		rolando = new Personaje(espectroMalefico, [], 0)
+		rolando = new Personaje(espectroMalefico, [], 0, 100)
 	}
 	
 	test "cuando preguntamos por su nivel de hechiceria, este retorna 56" {

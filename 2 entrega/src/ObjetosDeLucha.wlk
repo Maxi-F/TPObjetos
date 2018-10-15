@@ -1,4 +1,5 @@
 import FuerzaOscura.*
+import Hechizos.*
 
 class Arma{
 	var tipoDeArma
@@ -8,6 +9,8 @@ class Arma{
 	}
 	
 	method unidadesDeLucha(portador) = 3
+	
+	method precio(portador) = self.unidadesDeLucha(portador)*5
 }
 
 class MascaraOscura{
@@ -34,6 +37,8 @@ class Armadura{
 	method cambiarRefuerzo(nuevoRefuerzo) { refuerzo = nuevoRefuerzo }
 	
 	method unidadesDeLucha(portador) = valorBaseDeArmadura + refuerzo.valorDelRefuerzo(portador)
+	
+	method precio(portador) = refuerzo.precioDelRefuerzo(portador, valorBaseDeArmadura)
 } 
 
 class CotaDeMalla{
@@ -44,14 +49,28 @@ class CotaDeMalla{
 	}
 	
 	method valorDelRefuerzo(portador) = valorDelRefuerzo
+	
+	method precioDelRefuerzo(portador, valorBaseDeArmadura) = valorDelRefuerzo/2
 }
 
 object bendicion{
 	method valorDelRefuerzo(portador) = portador.nivelDeHechiceria()
+	
+	method precioDelRefuerzo(portador, valorBaseDeArmadura) = valorBaseDeArmadura
+}
+
+object collarDivino{
+	var property perlas = 5
+	
+	method unidadesDeLucha(portador) = perlas
+	
+	method precio(portador) = perlas*2
 }
 
 object ningunRefuerzo{
 	method valorDelRefuerzo(portador) = 0
+	
+	method precioDelRefuerzo(portador, valorBaseDeArmadura) = 2
 }
 
 object espejo{
@@ -61,6 +80,8 @@ object espejo{
 		else
 			return portador.unidadesDeLuchaDePertenenciaMasPoderosa()
 	}
+	
+	method precio(portador) = 90
 }
 
 class LibroDeHechizos{
@@ -73,14 +94,9 @@ class LibroDeHechizos{
 	method agregarHechizo(nuevoHechizo) { hechizos.add(nuevoHechizo) }
 	
 	method poder() = hechizos.filter({unHechizo => unHechizo.esHechizoPoderoso()}).sum({unHechizo => unHechizo.poder()})
+	
+	method precio(portador) = hechizos.size()*10 + self.poder()
 }
 
-object collarDivino{
-	var property perlas = 5
-	
-	method unidadesDeLucha(portador) = perlas
-	
-	
-}
 
 

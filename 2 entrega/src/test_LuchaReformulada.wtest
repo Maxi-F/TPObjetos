@@ -15,7 +15,7 @@ describe "Se crea a ´Rolando´. Su hechizo preferido es un hechizo de logos con
 		espectroMalefico = new HechizoDeLogos("Espectro Malefico", 1)
 		espadaDelDestino = new Arma("Espada Del Destino")
 		mascaraOscura = new MascaraOscura(1, 4)
-		rolando = new Personaje(espectroMalefico, [espadaDelDestino, mascaraOscura, collarDivino], 1)
+		rolando = new Personaje(espectroMalefico, [espadaDelDestino, mascaraOscura, collarDivino], 1, 100)
 	}
 	
 	test "Cuando se eliminan todos los artefactos, la habilidad para la lucha de Rolando es 1 "{

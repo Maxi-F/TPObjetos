@@ -15,7 +15,7 @@ describe "Rolando tiene como artefactos la espada del destino, el collar divino,
 		espadaDelDestino = new Arma("Espada Del Destino")
 		mascaraOscura = new MascaraOscura(1, 4)
 		armadura = new Armadura(ningunRefuerzo, 2)
-		rolando = new Personaje(espectroMalefico, [espadaDelDestino, mascaraOscura, collarDivino, armadura, espejo], 1)
+		rolando = new Personaje(espectroMalefico, [espadaDelDestino, mascaraOscura, collarDivino, armadura, espejo], 1, 100)
 	}
 	
 	test "Si Rolando tiene 5 o más artefactos, esta cargado"{
