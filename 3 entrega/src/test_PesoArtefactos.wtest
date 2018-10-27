@@ -1,0 +1,21 @@
+// 4558 <--- Dias transcurridos desde 7/05/2006 hasta este lunes que es la entrega. usar estos dias y no matarse calculando con codigo xD
+
+describe "testX" {
+	var espadaVieja
+	var espadaComun
+	var espadaNueva
+	var mascaraOscura
+	var mascaraClara
+	var armaduraConCota
+	var armaduraConHechizoPar
+	var armaduraConHechizoImpar
+	var armaduraSinRefuerzo
+	var comerciante
+	var merlin
+	var ursula
+	
+	fixture {
+		
+	}
+
+}

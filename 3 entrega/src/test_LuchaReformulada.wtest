@@ -1,0 +1,61 @@
+import Personaje.*
+import Hechizos.*
+import FuerzaOscura.*
+import ObjetosDeLucha.*
+
+describe "Se crea a ´Rolando´. Su hechizo preferido es un hechizo de logos con el nombre ´Espectro Malefico´, con multiplo 1.
+		  tiene como artefactos la espada del destino, el collar divino (con 5 perlas) y la mascara oscura, con un indice de oscuridad de 1 y
+		  un minimo de 4." {
+		  		  	
+	var rolando
+	var espectroMalefico
+	var espadaDelDestino
+	var mascaraOscura
+	fixture {
+		espectroMalefico = new HechizoDeLogos("Espectro Malefico", 1)
+		espadaDelDestino = new Arma("Espada Del Destino")
+		mascaraOscura = new MascaraOscura(1, 4)
+		rolando = new Personaje(espectroMalefico, [espadaDelDestino, mascaraOscura, collarDivino], 1, 100)
+	}
+	
+	test "Cuando se eliminan todos los artefactos, la habilidad para la lucha de Rolando es 1 "{
+		rolando.removerTodosLosArtefactos()
+		assert.equals(1, rolando.habilidadParaLaLucha())
+	}
+	
+	test "La habilidad de Rolando con todos los artefactos es 13"{
+		assert.equals(13, rolando.habilidadParaLaLucha())
+	}
+	
+	test "Cuando se cambia la cantidad de perlas del collar divino a 3, la habilidad para la lucha de Rolando con todos los artefactos es 11"{
+		collarDivino.perlas(3)
+		assert.equals(11, rolando.habilidadParaLaLucha())
+	}
+	
+	test "Cuando se cambia el valor base para la lucha de Rolando a 8, la habilidad para la lucha de Rolando con todos los artefactos es 20"{
+		rolando.valorBaseDeLucha(8)
+		assert.equals(20, rolando.habilidadParaLaLucha())
+	}
+	
+	test "Cuando ocurre un eclipse, el valor de lucha de la mascara oscura es 5"{
+		fuerzaOscura.eclipse()
+		assert.equals(5,mascaraOscura.unidadesDeLucha(rolando))
+		
+	}
+	
+	test "Cuando se elimina la mascara oscura de los artefactos de Rolando, la habilidad para la lucha es 9 "{
+		rolando.removerArtefacto(mascaraOscura)
+		assert.equals(9, rolando.habilidadParaLaLucha())
+	}
+	
+	test "Cuando se tiene una mascara oscura con un indice de oscuridad igual a 0 y valor minimo 4, el valor de lucha de esta es igual a 4." {
+		var mascaraNoOscura = new MascaraOscura(0, 4)
+		assert.equals(4, mascaraNoOscura.unidadesDeLucha(rolando))
+	}
+	
+		test "Cuando se tiene una mascara oscura con un indice de oscuridad igual a 0 y valor minimo 2, el valor de lucha de esta es igual a 4." {
+		var mascaraNoOscura = new MascaraOscura(0, 2)
+		assert.equals(2, mascaraNoOscura.unidadesDeLucha(rolando))
+	}
+}
+	

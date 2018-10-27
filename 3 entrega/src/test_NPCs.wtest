@@ -1,0 +1,29 @@
+import NPCs.*
+import Hechizos.*
+import FuerzaOscura.* 
+import ObjetosDeLucha.*
+
+describe "testX" {
+	var navi
+	var ashleyGraham
+	var mascaraClara
+	
+	fixture{
+		mascaraClara = new MascaraOscura(0, 4)
+		navi = new NPC(hechizoBasico, [], 1, 0, 0, facil)
+		ashleyGraham = new NPC(hechizoBasico, [mascaraClara], 5, 0, 0, moderado)
+	}
+	
+	test "La habilidad de lucha de navi es 1" {
+		assert.equals(1, navi.habilidadParaLaLucha())
+	}
+	
+	test "La habilidad de lucha de ashley es 18" {
+		assert.equals(18, ashleyGraham.habilidadParaLaLucha())
+	}
+	
+	test "Siendo la dificultad de ashleyGraham Dificil, su habilidad para la lucha es 36" {
+		ashleyGraham.dificultad(dificil)
+		assert.equals(36, ashleyGraham.habilidadParaLaLucha())
+	}
+}
