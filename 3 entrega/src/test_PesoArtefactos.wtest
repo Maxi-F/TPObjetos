@@ -1,4 +1,9 @@
 // 4558 <--- Dias transcurridos desde 7/05/2006 hasta este lunes que es la entrega. usar estos dias y no matarse calculando con codigo xD
+import Personaje.*
+import ObjetosDeLucha.*
+import Hechizos.*
+import FuerzaOscura.*
+
 
 describe "testX" {
 	var espadaVieja
@@ -15,7 +20,62 @@ describe "testX" {
 	var ursula
 	
 	fixture {
-		
+		espadaVieja = new Arma("Espada Vieja", 4558, 7)
+		espadaComun = new Arma("Espada Comun", 50, 5)
+		espadaNueva = new Arma("Espada Nueva", 0, 4)
+		mascaraOscura = new MascaraOscura(1, 3)
+		mascaraClara = new MascaraOscura(0, 2)
+		armaduraConCota = new Armadura(new CotaDeMalla(5), 5, 10)
+		armaduraConHechizoPar = new Armadura(new HechizoComercial("El Hechizo Comercial", 2, 0.2), 5, 12)
+		armaduraConHechizoImpar = new Armadura(new HechizoDeLogos("Espectro Malefico", 1), 5, 12)
+		armaduraSinRefuerzo = new Armadura(ningunRefuerzo, 5, 12)
+		// comerciante = new Comerciante()
+		merlin = new Personaje(hechizoBasico, [], 10, 100, 10)
+		ursula = new Personaje(hechizoBasico, [mascaraOscura, armaduraConCota], 10, 100, 200)
 	}
 
+	test "El peso de la espada vieja es de 6kg" {
+		assert.equals(6, espadaVieja.pesoTotal(merlin))
+	}
+	
+	test "El peso de la espada nueva es de 4kg" {
+		assert.equals(4, espadaNueva.pesoTotal(merlin))
+	}
+	
+	test "El peso de la espada comun es de 4,5kg" {
+		assert.equals(4.5, espadaComun.pesoTotal(merlin))
+	}
+	
+	test "Al ocurrir un eclipse, el peso de la mascara Oscura es de 5kg" {
+		fuerzaOscura.eclipse()
+		assert.equals(5, mascaraOscura.pesoTotal(merlin))
+	}
+	
+	test "El peso de la mascara clara es de 2kg" {
+		assert.equals(2, mascaraClara.pesoTotal(merlin))
+	}
+	
+	test "El peso de la armadura con cota de malla es de 11kg" {
+		assert.equals(11, armaduraConCota.pesoTotal(merlin))
+	}
+	
+	test "El peso de la armadura con Hechizo Par es de 14kg" {
+		assert.equals(14, armaduraConHechizoPar.pesoTotal(merlin))
+	}
+	
+	test "El peso de la armadura con Hechizo Impar es de 13kg" {
+		assert.equals(13, armaduraConHechizoImpar.pesoTotal(merlin))
+	}
+	
+	test "El peso de la armadura sin refuerzo es de 12kg" {
+		assert.equals(12, armaduraSinRefuerzo.pesoTotal(merlin))	
+	}
+	// test "cuando Merlin le compra a Mock Hnos. la mascara clara y Oscura, el peso total que carga Merlin es 5" {}
+	
+	// test "Merlin no le puede comprar a Mock Hnos. la armadura con hechizo par." {}
+	
+	test "Cuando Ursula se desprende de la armadura con cota de malla, el peso total que carga Ursula es de 3" {
+		ursula.removerArtefacto(armaduraConCota)
+		assert.equals(3, ursula.cantidadDeCarga())
+	}
 }

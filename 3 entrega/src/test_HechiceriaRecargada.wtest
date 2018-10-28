@@ -11,8 +11,8 @@ describe "Se crea a ´Rolando´. Su hechizo preferido es un hechizo de logos con
 	fixture {
 		espectroMalefico = new HechizoDeLogos("Espectro Malefico", 1)
 		hechizoComercial = new HechizoComercial("El Hechizo Comercial", 2, 0.2)
-		rolando = new Personaje(espectroMalefico, [], 0, 100)
-		furibunda = new Personaje(hechizoComercial, [], 0, 100)
+		rolando = new Personaje(espectroMalefico, [], 0, 100, 1000)
+		furibunda = new Personaje(hechizoComercial, [], 0, 100, 1000)
 	}
 	
 	test "cuando preguntamos por su nivel de hechiceria, este retorna 56" {

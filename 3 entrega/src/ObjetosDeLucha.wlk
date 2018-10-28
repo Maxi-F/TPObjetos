@@ -49,7 +49,7 @@ class Armadura{
 	var valorBaseDeArmadura
 	var peso
 	
-	constructor(unRefuerzo, unValorBaseDeArmadura, unPeso, unosDias){
+	constructor(unRefuerzo, unValorBaseDeArmadura, unPeso){
 		refuerzo = unRefuerzo
 		valorBaseDeArmadura = unValorBaseDeArmadura
 		peso = unPeso
@@ -84,17 +84,13 @@ class CotaDeMalla{
 object bendicion{
 	method valorDelRefuerzo(portador) = portador.nivelDeHechiceria()
 	
+	method pesoExtra() = 0
+	
 	method precioDelRefuerzo(portador, valorBaseDeArmadura) = valorBaseDeArmadura
 }
 
-class CollarDivino{
-	var property perlas
-	var peso
-	
-	constructor(unasPerlas, unPeso) {
-		perlas = unasPerlas
-		peso = unPeso
-	}
+object collarDivino{
+	var property perlas = 5
 
 	method unidadesDeLucha(portador) = perlas
 	
@@ -113,7 +109,7 @@ object ningunRefuerzo{
 	method pesoExtra() = 0
 }
 
-object espejo inherits PesoYDiasArtefacto(dias, peso) {
+class Espejo inherits PesoYDiasArtefacto {
 	method unidadesDeLucha(portador){
 		if (portador.soloTieneAlEspejo())
 			return 0

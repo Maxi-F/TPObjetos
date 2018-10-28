@@ -10,12 +10,14 @@ describe "Rolando tiene como artefactos la espada del destino, el collar divino,
 	var mascaraOscura
 	var armadura
 	var libroDeHechizos
+	var espejo
 	fixture {
 		espectroMalefico = new HechizoDeLogos("Espectro Malefico", 1)
-		espadaDelDestino = new Arma("Espada Del Destino")
+		espadaDelDestino = new Arma("Espada Del Destino", 0, 0)
 		mascaraOscura = new MascaraOscura(1, 4)
-		armadura = new Armadura(ningunRefuerzo, 2)
-		rolando = new Personaje(espectroMalefico, [espadaDelDestino, mascaraOscura, collarDivino, armadura, espejo], 1, 100)
+		armadura = new Armadura(ningunRefuerzo, 2, 0)
+		espejo = new Espejo(0, 0)
+		rolando = new Personaje(espectroMalefico, [espadaDelDestino, mascaraOscura, collarDivino, armadura, espejo], 1, 100, 1000)
 	}
 	
 	test "Si Rolando tiene 5 o más artefactos, esta cargado"{
@@ -64,7 +66,7 @@ describe "Rolando tiene como artefactos la espada del destino, el collar divino,
 	}
 	
 	test "Al agregarle una armadura extra a rolando, cuyo valor base es 5 y con un refuerzo de cota de malla que tiene un valor de lucha 6, la habilidad de lucha de Rolando es de 37" {
-		rolando.agregarArtefacto(new Armadura(new CotaDeMalla(6), 5))
+		rolando.agregarArtefacto(new Armadura(new CotaDeMalla(6), 5, 0, 0))
 		assert.equals(37, rolando.habilidadParaLaLucha())
 	}
 }

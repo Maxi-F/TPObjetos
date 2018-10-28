@@ -91,7 +91,7 @@ class Personaje {
 	
 	method habilidadEsMayorQueHechiceria() = self.habilidadParaLaLucha() > self.nivelDeHechiceria()
 	
-	method soloTieneAlEspejo() = artefactos == [Espejo]
+	method soloTieneAlEspejo() = !(artefactos.any({artefacto => artefacto.noEsEspejo()}))
 	
 	method pertenenciaMasPoderosa() = artefactos.filter({unArtefacto => unArtefacto.noEsEspejo()}).max({unArtefacto => unArtefacto.unidadesDeLucha(self)})
 	
