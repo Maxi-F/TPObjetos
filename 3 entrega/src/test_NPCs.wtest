@@ -3,7 +3,9 @@ import Hechizos.*
 import FuerzaOscura.* 
 import ObjetosDeLucha.*
 
-describe "testX" {
+/*----- Tests Entrega 3 -----*/
+
+describe "Se crea a Navi y a Ashley Graham" {
 	var navi
 	var ashleyGraham
 	var mascaraClara

@@ -1,0 +1,51 @@
+import Personaje.*
+import ObjetosDeLucha.*
+import Hechizos.*
+import FuerzaOscura.*
+
+/*----- Tests Entrega 1 -----*/
+
+describe "Rolando tiene como artefactos la espada del destino, el collar divino (con 5 perlas) y la mascara oscura." {
+	var rolando
+	var espectroMalefico
+	var espadaDelDestino
+	var mascaraOscura
+	fixture {
+		espectroMalefico = new HechizoDeLogos("Espectro Malefico", 1)
+		rolando = new Personaje(espectroMalefico, [], 1, 100, 50)
+		espadaDelDestino = new Arma("Espada", 0, 10)
+		rolando.agregarArtefacto(espadaDelDestino)
+		rolando.agregarArtefacto(collarDivino)
+		mascaraOscura = new MascaraOscura(1.6, 1)
+		rolando.agregarArtefacto(mascaraOscura)
+	}
+	
+	test "Cuando se eliminan todos los artefactos, la habilidad para la lucha de Rolando es 1 "{
+		rolando.removerTodosLosArtefactos()
+		assert.equals(1, rolando.habilidadParaLaLucha())
+	}
+	
+	test "La habilidad de Rolando con todos los artefactos es 13"{
+		assert.equals(13, rolando.habilidadParaLaLucha())
+	}
+	
+	test "Cuando se cambia la cantidad de perlas del collar divino a 3, la habilidad para la lucha de Rolando con todos los artefactos es 11"{
+		collarDivino.perlas(3)
+		assert.equals(11, rolando.habilidadParaLaLucha())
+	}
+	
+	test "Cuando se cambia el valor base para la lucha de Rolando a 8, la habilidad para la lucha de Rolando con todos los artefactos es 20"{
+		rolando.valorBaseDeLucha(8)
+		assert.equals(20, rolando.habilidadParaLaLucha())
+	}
+	
+	test "Cuando ocurre un eclipse, el valor de lucha de la mascara oscura es 8"{
+		fuerzaOscura.eclipse()
+		assert.equals(8, mascaraOscura.unidadesDeLucha(rolando))
+	}
+	
+	test "Cuando se elimina la mascara oscura de los artefactos de Rolando, la habilidad para la lucha es 9 "{
+		rolando.removerArtefacto(mascaraOscura)
+		assert.equals(9, rolando.habilidadParaLaLucha())
+	}	
+}

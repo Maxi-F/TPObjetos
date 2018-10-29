@@ -3,7 +3,7 @@ import Hechizos.*
 
 class PesoYDiasArtefacto {
 	var dias
-	var peso
+	var property peso
 	
 	constructor(unosDias, unPeso) {
 		dias = unosDias
@@ -25,7 +25,7 @@ class Arma inherits PesoYDiasArtefacto{
 	
 	method noEsEspejo() = true
 	
-	method precio(portador) = self.unidadesDeLucha(portador)*5
+	method precio(portador) = self.peso()*5
 }
 
 class MascaraOscura{
@@ -40,6 +40,8 @@ class MascaraOscura{
 	method unidadesDeLucha(portador) = valorMinimo.max(0.5*fuerzaOscura.valor()*indiceDeOscuridad)
 	
 	method pesoTotal(portador) = self.unidadesDeLucha(portador).max(0)
+	
+	method precio(portador) = indiceDeOscuridad*10
 	
 	method noEsEspejo() = true
 }

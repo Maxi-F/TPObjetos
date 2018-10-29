@@ -3,6 +3,8 @@ import Hechizos.*
 import FuerzaOscura.*
 import ObjetosDeLucha.*
 
+/*----- Tests Entrega 2 -----*/
+
 describe "Rolando tiene como artefactos la espada del destino, el collar divino, la mascara oscura, una armadura sin refuerzo y el espejo."{
 	var rolando
 	var espectroMalefico
@@ -66,7 +68,7 @@ describe "Rolando tiene como artefactos la espada del destino, el collar divino,
 	}
 	
 	test "Al agregarle una armadura extra a rolando, cuyo valor base es 5 y con un refuerzo de cota de malla que tiene un valor de lucha 6, la habilidad de lucha de Rolando es de 37" {
-		rolando.agregarArtefacto(new Armadura(new CotaDeMalla(6), 5, 0, 0))
+		rolando.agregarArtefacto(new Armadura(new CotaDeMalla(6), 5, 0))
 		assert.equals(37, rolando.habilidadParaLaLucha())
 	}
 }

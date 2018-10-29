@@ -7,6 +7,8 @@ class PesoExtraDeHechizo {
 			return 1
 		}
 	}
+	
+	method poder()
 }
 
 class HechizoDeLogos inherits PesoExtraDeHechizo{
@@ -22,7 +24,7 @@ class HechizoDeLogos inherits PesoExtraDeHechizo{
 		nombre = nuevoNombre
 	}
 	
-	method poder() = nombre.size() * multiplo
+	override method poder() = nombre.size() * multiplo
 	
 	method esHechizoPoderoso() = self.poder() > 15
 	
@@ -44,7 +46,7 @@ class HechizoComercial inherits HechizoDeLogos {
 }
 
 object hechizoBasico inherits PesoExtraDeHechizo{
-	method poder() = 10
+	override method poder() = 10
 	
 	method esHechizoPoderoso() = false
 	

@@ -1,0 +1,66 @@
+import Personaje.*
+import ObjetosDeLucha.*
+import Hechizos.*
+import Comerciante.*
+
+/*----- Tests Entrega 3 -----*/
+
+describe "Se crea a los comerciantes Pastoriza, Prieto y Fermepin. Reaparece en acción Ursula" {
+	var pastoriza
+	var prieto
+	var fermepin
+	var ursula
+	var mascaraOscura
+	var armaduraConCota
+	
+	fixture{
+		pastoriza = new Comerciante(independiente, 0.09, 5)
+		prieto = new Comerciante(registrado, 0, 5)
+		fermepin = new Comerciante(conImpuestoALasGanancias, 0, 5)
+		mascaraOscura = new MascaraOscura(1, 3)
+		armaduraConCota = new Armadura(new CotaDeMalla(5), 5, 10)
+		ursula = new Personaje(hechizoBasico, [mascaraOscura, armaduraConCota], 10, 100, 200)
+	}
+
+	test "Ursula le compra la mascaraOscura a Pastoriza y le quedan 89.91 monedas" {
+		ursula.comprarArtefacto(mascaraOscura, pastoriza)
+		assert.equals(89.91, ursula.oro())
+		// 100 - 10 - 0.09 = 89.91
+	}
+	
+	test "Ursula le compra la mascaraOscura a Prieto y le quedan 87.9 monedas" {
+		ursula.comprarArtefacto(mascaraOscura, prieto)
+		assert.equals(87.9, ursula.oro())
+	}
+	
+	test "Ursula le compra la mascaraOscura a Fermepin y le quedan 88.25 monedas" {
+		ursula.comprarArtefacto(mascaraOscura, fermepin)
+		assert.equals(88.25, ursula.oro())
+	}
+	
+	test "Si Pastoriza se recategoriza, a Ursula le quedan 89.82 monedas al comprarle la mascaraOscura" {
+		pastoriza.recategorizacion()
+		ursula.comprarArtefacto(mascaraOscura, pastoriza)
+		assert.equals(89.82, ursula.oro())
+		// 100 - 10 - 0.18 = 89.82
+	}
+	
+	test "Si Pastoriza se recategoriza dos veces, a Ursula le quedan 87.9 monedas al comprarle la mascaraOscura" {
+		pastoriza.recategorizacion()
+		pastoriza.recategorizacion()
+		ursula.comprarArtefacto(mascaraOscura, pastoriza)
+		assert.equals(87.9, ursula.oro())
+	}
+	
+	test "Si Prieto se recategoriza, a Ursula le quedan 88.25 monedas al comprarle la mascaraOscura" {
+		prieto.recategorizacion()
+		ursula.comprarArtefacto(mascaraOscura, prieto)
+		assert.equals(88.25, ursula.oro())
+	}
+	
+	test "Si Fermepin se recategoriza, a Ursula le quedan 88.25 monedas al comprarle la mascaraOscura" {
+		fermepin.recategorizacion()
+		ursula.comprarArtefacto(mascaraOscura, fermepin)
+		assert.equals(88.25, ursula.oro())
+	}
+}

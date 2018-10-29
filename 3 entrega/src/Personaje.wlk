@@ -1,46 +1,12 @@
-/*       _______________________________________________________________________
+/*   _______________________________________________________________________
 	|:..                         TP  OBJETOS                   ``:::%%%%%%%%|
-	|%%%:::::..         Expertos en Lucha y Hechiceria            `:::::%%%%|
+	|%%%:::::..        Lucha y Hechiceria en el Mercado           `:::::%%%%|
 	|%%%%%%%:::::.....________________________________________________::::::|
 	
 	
+								
+								INSERT ASCII
 
-		  CUANDO EL TUTOR TE DICE QUE LOS IF SON SACRILEGIO
-			  
-	                                                     ___,------, 
-	             _,--.---.                         __,--'         / 
-	           ,' _,'_`._ \                    _,-'           ___,| 
-	          ;--'       `^-.                ,'        __,---'   || 
-	        ,'               \             ,'      _,-'          || 
-	       /                  \         _,'     ,-'              || 
-	      :                    .      ,'     _,'                 |: 
-	      |                    :     `.    ,'                    |: 
-	      |           _,-      |       `-,'                      :: 
-	     ,'____ ,  ,-'  `.   , |,         `.                     : \ 
-	     ,'    `-,'       ) / \/ \          \                     : : 
-	     |      _\   o _,-'    '-.           `.                    \ \ 
-	      `o_,-'  `-,-' ____   ,` )-.______,'  `.                   : : 
-	       \-\    _,---'    `-. -'.\  `.  /     `.                  \  \ 
-	        / `--'             `.   \   \:        \                  \,.\ 
-	       (              ____,  \  |    \\        \                 :\ \\ 
-	        )         _,-'    `   | |    | \        \                 \\_\\ 
-	       /      _,-'            | |   ,'-`._      _\                 \,' 
-	       `-----' |`-.           ;/   (__ ,' `-. _;-'`\           _,--' 
-		     ,'        |   `._     _,' \-._/  Y    ,-'      \
-	    /        _ |      `---'    :,-|   |    `     _,-'\_,--'   \ 
-	   :          `|       \`-._   /  |   '     `.,-' `._`         \ 
-	   |           _\_    _,\/ _,-'|                     `-._       \ 
-	   :   ,-         `.-'_,--'    \                         `       \ 
-	   | ,'           ,--'      _,--\           _,                    : 
-	    )         .    \___,---'   ) `-.____,--'                      | 
-	   _\    .     `    ||        :            \                      ; 
-	 ,'  \    `.    )--' ;        |             `-.                  / 
-	|     \     ;--^._,-'         |                `-._            _/_\ 
-	\    ,'`---'                  |                    `--._____,-'_'  \ 
-	 \_,'                         `._                          _,-'     ` 
-	                            ,-'  `---.___           __,---' 
-	                          ,'             `---------' 
-	                        ,' 
 
 */
 
@@ -53,7 +19,7 @@ class Personaje {
 	var hechizoPreferido
 	var artefactos
 	var property valorBaseDeLucha
-	var oro
+	var property oro
 	var capacidadDeCarga
 	
 	constructor(unHechizoPreferido, unosArtefactos, unValorBaseDeLucha, unasMonedasDeOro, unaCapacidadDeCarga) {
@@ -91,7 +57,7 @@ class Personaje {
 	
 	method habilidadEsMayorQueHechiceria() = self.habilidadParaLaLucha() > self.nivelDeHechiceria()
 	
-	method soloTieneAlEspejo() = !(artefactos.any({artefacto => artefacto.noEsEspejo()}))
+	method soloTieneAlEspejo() = artefactos == [new Espejo(0,0)]
 	
 	method pertenenciaMasPoderosa() = artefactos.filter({unArtefacto => unArtefacto.noEsEspejo()}).max({unArtefacto => unArtefacto.unidadesDeLucha(self)})
 	
@@ -100,9 +66,7 @@ class Personaje {
 	method cantidadDeArtefactos() = artefactos.size()
 	
 	method estaCargado() = self.cantidadDeArtefactos() >= 5
-	
-	method oro() = oro
-	
+
 	method comprarHechizo(hechizo){
 		self.pagar(hechizo.precio(self) - hechizoPreferido.precio(self)/2)
 		hechizoPreferido = hechizo
@@ -118,8 +82,8 @@ class Personaje {
 	
 	method esPagable(monto) = monto <= oro
 	
-	method comprarArtefacto(artefacto){
-		self.pagar(artefacto.precio(self))
+	method comprarArtefacto(artefacto, comerciante){
+		self.pagar(artefacto.precio(self) + comerciante.impuestoAdicionalSobre(artefacto))
 		self.agregarArtefacto(artefacto)
 	}
 

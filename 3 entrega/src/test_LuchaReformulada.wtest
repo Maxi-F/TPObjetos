@@ -3,6 +3,8 @@ import Hechizos.*
 import FuerzaOscura.*
 import ObjetosDeLucha.*
 
+/*----- Tests Entrega 2 -----*/
+
 describe "Se crea a ´Rolando´. Su hechizo preferido es un hechizo de logos con el nombre ´Espectro Malefico´, con multiplo 1.
 		  tiene como artefactos la espada del destino, el collar divino (con 5 perlas) y la mascara oscura, con un indice de oscuridad de 1 y
 		  un minimo de 4." {

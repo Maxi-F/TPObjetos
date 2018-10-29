@@ -1,11 +1,15 @@
-// 4558 <--- Dias transcurridos desde 7/05/2006 hasta este lunes que es la entrega. usar estos dias y no matarse calculando con codigo xD
+// 4558 <--- Dias transcurridos desde 7/05/2006 hasta este lunes que es la entrega.
+// Usar esos dias y no matarse calculando con codigo xD
+
 import Personaje.*
 import ObjetosDeLucha.*
 import Hechizos.*
 import FuerzaOscura.*
+import Comerciante.*
 
+/*----- Tests Entrega 3 -----*/
 
-describe "testX" {
+describe "Se tienen numerosos artefactos" {
 	var espadaVieja
 	var espadaComun
 	var espadaNueva
@@ -15,7 +19,7 @@ describe "testX" {
 	var armaduraConHechizoPar
 	var armaduraConHechizoImpar
 	var armaduraSinRefuerzo
-	var comerciante
+	var mockHnos
 	var merlin
 	var ursula
 	
@@ -29,7 +33,7 @@ describe "testX" {
 		armaduraConHechizoPar = new Armadura(new HechizoComercial("El Hechizo Comercial", 2, 0.2), 5, 12)
 		armaduraConHechizoImpar = new Armadura(new HechizoDeLogos("Espectro Malefico", 1), 5, 12)
 		armaduraSinRefuerzo = new Armadura(ningunRefuerzo, 5, 12)
-		// comerciante = new Comerciante()
+		mockHnos = new Comerciante(independiente, 0, 0)
 		merlin = new Personaje(hechizoBasico, [], 10, 100, 10)
 		ursula = new Personaje(hechizoBasico, [mascaraOscura, armaduraConCota], 10, 100, 200)
 	}
@@ -70,9 +74,16 @@ describe "testX" {
 	test "El peso de la armadura sin refuerzo es de 12kg" {
 		assert.equals(12, armaduraSinRefuerzo.pesoTotal(merlin))	
 	}
-	// test "cuando Merlin le compra a Mock Hnos. la mascara clara y Oscura, el peso total que carga Merlin es 5" {}
 	
-	// test "Merlin no le puede comprar a Mock Hnos. la armadura con hechizo par." {}
+	test "cuando Merlin le compra a Mock Hnos. la mascara clara y Oscura, el peso total que carga Merlin es 5" {
+		merlin.comprarArtefacto(mascaraClara, mockHnos)
+		merlin.comprarArtefacto(mascaraOscura, mockHnos)
+		assert.equals(5, merlin.cantidadDeCarga())
+	}
+	
+	test "Merlin no le puede comprar a Mock Hnos. la armadura con hechizo par." {
+		assert.throwsException{merlin.comprarArtefacto(armaduraConHechizoPar, mockHnos)}
+	}
 	
 	test "Cuando Ursula se desprende de la armadura con cota de malla, el peso total que carga Ursula es de 3" {
 		ursula.removerArtefacto(armaduraConCota)
